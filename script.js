@@ -5,9 +5,9 @@ async function getQuote() {
     try {
         const response = await fetch(proxyUrl + apiUrl);
         const data = await response.json();
-        
-    } catch(error){
-        console.log('error,no hay cita', error);
+        console.log(data);
+    } catch (error) {
+        getQuote();
     }
 
 }

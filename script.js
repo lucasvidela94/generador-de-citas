@@ -6,16 +6,12 @@ const newQuoteButton = document.getElementById('nueva-cita');
 const loader = document.getElementById('loader')
 
 
-//Mostrar el simbolo de cargar mientras espera a la devolucion de la cita
-
-function loading(){
+function showLoadingIcon(){
     loader.hidden= false;
     quoteContainer.hidden = true;
 }
 
-//Esconder simbolo de cargar
-
-function complete(){
+function removeLoadingIcon(){
     if(!loader.hidden){
         quoteContainer.hidden=false;
         loader.hidden =true;
@@ -24,7 +20,7 @@ function complete(){
 
 //Sacar cita de API -- Gettin quote from quote API
 async function getQuote() {
-    loading();
+    showLoadingIcon();
 
     const proxyUrl = 'https://whispering-tor-04671.herokuapp.com/'
     const apiUrl = 'http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json';
@@ -48,9 +44,7 @@ async function getQuote() {
         }
         
         quoteText.innerText = data.quoteText;
-        
-        //Proceso completado,se muestra la cita
-        complete(); 
+         removeLoadingIcon(); 
 
     } catch (error) {
         getQuote();
